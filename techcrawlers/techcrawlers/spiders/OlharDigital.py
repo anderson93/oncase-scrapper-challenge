@@ -67,6 +67,19 @@ class OlharDigitalScrapper(scrapy.Spider):
         assert acessedtime is not None
         assert url is not None
 
+        scraped_info = {
+                        'title': title, 
+                        'writtennews':writtentext, 
+                        'autor' :autor, 
+                        'editor':editor, 
+                        'tags':tags, 
+                        'hora da publicação':timepub, 
+                        'hora de acesso':acessedtime, 
+                        'url':url
+                        }
+
+        #yield or give the scraped info to scrapy
+        yield scraped_info
         # TODO: Definir arquivo de carregamento para a base
         # Itens de saída:
         # title
@@ -78,5 +91,5 @@ class OlharDigitalScrapper(scrapy.Spider):
         # acessedtime
         # url
 
-        self.log('Saved file %s' % filename)
+        # self.log('Saved file %s' % filename)
 
