@@ -1,3 +1,4 @@
+import pandas as pd
 import os
 import datetime
 from bs4 import BeautifulSoup                                                                                                                 
@@ -9,16 +10,11 @@ class OlharDigitalScrapper(scrapy.Spider):
  
     def start_requests(self):
         # Diretório de urls
-        # Apesar de poder pegar mais facilmente as notícias através do site RSS do portal,
+        # Apesar de ser facil capturar as notícias através do site RSS do portal,
         # perderiamos a possibilidade de pegar também informações como as tags relacionadas a notícia,
         # portanto para esse site continuarei pegando o site normal ao invés de ir pelo 
         # caminho mais prático que seria o RSS
-        fetch("https://olhardigital.com.br/noticias/")  
-        # urls parsed
-        news = response.css("div.blk-items")[0] 
-        urls = news.css("a::attr(href)").getall()
-        for url in urls:
-            yield scrapy.Request(url='http:'+url, callback=self.parse)
+        return map(lambda x: scrapy.Request(url=x, callback=self.parse), pd.read_csv('olhardigital-links.csv')['url'].values)
 
     def parse(self, response):
         # Definindo o nome da pasta
@@ -52,8 +48,11 @@ class OlharDigitalScrapper(scrapy.Spider):
         if 'editado' in autor:
             editor = autor.split('por')[1][1:]
             autor = autor.split(',')[0]
+            assert editor is not None
         else:
             editor = None
+            assert editor is None
+
         timepub = datetime.datetime.strptime(datepub+' '+hourpub, "%d/%m/%Y %Hh%M")
         acessedtime = datetime.datetime.now()
 
@@ -61,11 +60,10 @@ class OlharDigitalScrapper(scrapy.Spider):
         assert title is not None
         assert writtentext is not None
         assert autor is not None
-        assert editor is not None
         assert tags is not None
         assert timepub is not None
         assert acessedtime is not None
-        assert url is not None
+        assert response.url is not None
 
         scraped_info = {
                         'title': title, 
@@ -75,7 +73,7 @@ class OlharDigitalScrapper(scrapy.Spider):
                         'tags':tags, 
                         'hora da publicação':timepub, 
                         'hora de acesso':acessedtime, 
-                        'url':url
+                        'url':response.url
                         }
 
         #yield or give the scraped info to scrapy
