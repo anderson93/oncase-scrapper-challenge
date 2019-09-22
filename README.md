@@ -8,13 +8,14 @@ Projeto para cumprimento de tarefa desafio definida pelo processo de seleção d
   * [Feito com](#feito-com)
 * [Início](#início)
   * [Prerequisitos](#prerequisitos)
+    * [MongoDb - Linux](#mongodb---linux)
   * [Instalação](#instalação)
-* [Usage](#usage)
+* [Uso](#uso)
 * [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Contribuição](#contribuição)
+* [Licença](#licença)
+* [Contato](#contato)
+* [Reconhecimentos](#reconhecimento)
 
 
 
@@ -24,8 +25,6 @@ Projeto para cumprimento de tarefa desafio definida pelo processo de seleção d
 Projeto para cumprimento de tarefa desafio definida pelo processo de seleção da empresa Oncase Intelligence Consulting. O projeto consiste em desenvolver um processo de web crawling para estruturar dados de portais concorrentes de notícias, agregar métricas sobre essesdados e disponibilizar as informações. 
 
 O tema escolhido nesse projeto é o de tecnologia, agregaremos então as notícias de três portais: [OlharDigital](https://olhardigital.com.br), [CanalTech](https://canaltech.com.br) e [GizModo](https://gizmodo.uol.com.br).
-
-
 
 ### Feito com
 
@@ -71,8 +70,8 @@ git clone https://github.com/anderson93/oncase-scrapper-challenge.git
 pip3 install -r requirements.txt
 ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
+<!-- EXEMPLOS DE USO -->
+## Uso
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
@@ -83,62 +82,45 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
+Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-challenge/issues) para uma lista de melhorias sugeridas e problemas/bugs conhecidos.
+
+### TODO: arquivo do log do projeto: ideias, decisões e reflexões ao longo do projeto.
+
+<!-- CONTRIBUIÇÃO -->
+## Contribuição
+
+Contribuições é o que faz a comunidade open source forte e um maravilhoso ambiente para aprender, se insipirar e criar. Quaisquer contribuições serão **efusivamente bem vindas.**
+
+1. Fork o projeto
+2. Crie seu ramo (`git checkout -b feature/FabulosoFeature`)
+3. Dê commit nas suas melhorias (`git commit -m 'Adicionando Fabulosidade'`)
+4. Dê push para o ramo (`git push origin feature/FabulosoFeature`)
+5. Abra um Pull request!
+6. ???
+7. Profit!
 
 
 
-<!-- CONTRIBUTING -->
-## Contributing
+<!-- LICENÇA -->
+## Licença
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Distribuída sob a licença MIT. Veja `LICENSE` para mais informações.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+<!-- CONTATO -->
+## Contato
 
+Anderson Henrique de Oliveira Conceição - [email](mailto:anderson93@gmail.com)
 
+Project Link: [https://github.com/anderson93/oncase-scrapper-challenge](https://github.com/anderson93/oncase-scrapper-challenge)
 
-<!-- LICENSE -->
-## License
+<!-- RECONHECIMENTOS -->
+## Reconhecimentos
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
-
-Project Link: [https://github.com/github_username/repo](https://github.com/github_username/repo)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
-
-
+* Obrigado a Oncase por me fornecer essa oportunidade de demonstrar o um pouco do meu conhecimento através deste desafio.
+* Agradeço também a comunidade Open-Source sem a qual jamais estaríamos desenvolvendo tecnologia e soluções a nivel industrial tão facilmente.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/anderson-hoc/
