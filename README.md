@@ -86,29 +86,29 @@ pip3 install -r requirements.txt
 
 Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-challenge/issues) para uma lista de melhorias sugeridas e problemas/bugs conhecidos.
 
-### TODO: arquivo do log do projeto: ideias, decisões e reflexões ao longo do projeto.
+#### TODO: arquivo do log do projeto: ideias, decisões e reflexões ao longo do projeto.
 
 <!-- DEPLOYMENT -->
 ## Estratégia de deployment
-### TODO
+#### TODO
 <!-- ENHANCEMENTS -->
 ## Propostas de melhorias
-### TODO
+#### TODO
 <!-- CODEMAP -->
 ## Mapa dos arquivos
-### TODO
+#### TODO
 <!-- SCRAPPERSEXPLANATIONS -->
 ## Explicação dos Scrappers
-### TODO
+#### TODO
 <!-- WORFLOW -->
 ## Pipeline
-### TODO
+#### TODO
 <!-- DATABASES -->
 ## Bases de dados no MongoDB
-### TODO
+#### TODO
 <!-- COLLECTIONS -->
 ## Coleções na base de dados `tech_news`
-### TODO
+#### TODO
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
 
@@ -132,7 +132,7 @@ Distribuída sob a licença MIT. Veja `LICENSE` para mais informações.
 
 [Anderson Henrique de Oliveira Conceição](https://www.linkedin.com/in/anderson-hoc/) - [email](mailto:anderson93@gmail.com)
 
-Project Link: [https://github.com/anderson93/oncase-scrapper-challenge](https://github.com/anderson93/oncase-scrapper-challenge)
+Link do projeto: [https://github.com/anderson93/oncase-scrapper-challenge](https://github.com/anderson93/oncase-scrapper-challenge)
 
 <!-- RECONHECIMENTOS -->
 ## Reconhecimentos
