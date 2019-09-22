@@ -1,6 +1,3 @@
-import os
-import datetime
-from bs4 import BeautifulSoup                                                                                                                 
 import scrapy
 
 class CanalTechLinksScrapper(scrapy.Spider):
