@@ -4,6 +4,8 @@ class OlharDigitalLinksScrapper(scrapy.Spider):
     name = "olhardigital-links"
 
     allowed_domains = ['olhardigital.com.br']
+
+    collection_name = "olhardigital-links"
     # Pegando os links para serem scrappeados
     def start_requests(self):
         urls = [f'https://olhardigital.com.br/noticias/{page}' for page in range(1,5)]

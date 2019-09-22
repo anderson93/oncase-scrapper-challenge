@@ -4,6 +4,9 @@ class GizModoLinksScrapper(scrapy.Spider):
     name = "gizmodo-links"
 
     allowed_domains = ['gizmodo.uol.com.br']
+
+    collection_name = "gizmodo-links"
+
     # Pegando os links para serem scrappeados
     def start_requests(self):
         urls = [f'https://gizmodo.uol.com.br/page/{page}' for page in range(1,5)]

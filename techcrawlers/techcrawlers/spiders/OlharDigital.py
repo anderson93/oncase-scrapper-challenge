@@ -3,18 +3,22 @@ import os
 import datetime
 from bs4 import BeautifulSoup                                                                                                                 
 import scrapy
+from techcrawlers.mongo_connector import MongoConnector
+
 
 class OlharDigitalScrapper(scrapy.Spider):
     name = "olhardigital"
     allowed_domains = ['olhardigital.com.br']
- 
+
+    collection_name = "news_data"
     def start_requests(self):
         # Diretório de urls
         # Apesar de ser facil capturar as notícias através do site RSS do portal,
         # perderiamos a possibilidade de pegar também informações como as tags relacionadas a notícia,
         # portanto para esse site continuarei pegando o site normal ao invés de ir pelo 
         # caminho mais prático que seria o RSS
-        return map(lambda x: scrapy.Request(url=x, callback=self.parse), pd.read_csv('olhardigital-links.csv')['url'].values)
+        mongo_provider = MongoConnector(None,None)
+        return [scrapy.Request(url=x['url'], callback=self.parse) for x in mongo_provider.get_collection(self.name+'-links').find({})]
 
     def parse(self, response):
         # Definindo o nome da pasta
@@ -71,23 +75,11 @@ class OlharDigitalScrapper(scrapy.Spider):
                         'autor' :autor, 
                         'editor':editor, 
                         'tags':tags, 
-                        'hora da publicação':timepub, 
-                        'hora de acesso':acessedtime, 
-                        'url':response.url
+                        'horapublicado':timepub, 
+                        'horaconsulta':acessedtime, 
+                        'url':response.url,
+                        'website': 'OlharDigital'
                         }
 
         #yield or give the scraped info to scrapy
         yield scraped_info
-        # TODO: Definir arquivo de carregamento para a base
-        # Itens de saída:
-        # title
-        # writtentext
-        # autor
-        # editor
-        # tags
-        # timepub
-        # acessedtime
-        # url
-
-        # self.log('Saved file %s' % filename)
-

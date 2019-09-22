@@ -3,6 +3,7 @@ import os
 import datetime
 from bs4 import BeautifulSoup                                                                                                                 
 import scrapy
+from techcrawlers.mongo_connector import MongoConnector
 
 # As informações de tempo estão em português, então converto-as para o horário padrão
 def timeparser(time_to_be_parsed):
@@ -43,21 +44,24 @@ class OlharDigitalScrapper(scrapy.Spider):
     name = "canaltech"
 
     allowed_domains = ['canaltech.com.br']
+
+    collection_name = "news_data"
     def start_requests(self):
         # Diretório de urls
         # Apesar de ser facil capturar as notícias através do site RSS do portal,
         # perderiamos a possibilidade de pegar também informações como as tags relacionadas a notícia,
         # portanto para esse site continuarei pegando o site normal ao invés de ir pelo 
         # caminho mais prático que seria o RSS        
-        urls = pd.read_csv('canaltech-links.csv')
+
         # A cada página esse elemento se repete, retiro para evitar conflitos na função parse
-        urls = urls[urls.values != 'https://canaltech.com.br/ultimas/']
+
+
         # Removendo artigos de video, pois além da formatação ser diferente, proveem uma 
         # leve explicação somente do video exemplo: https://canaltech.com.br/video/hands-on/apple-iphone-11-unboxinghands-on-11959/
         # - assim como podcast: https://canaltech.com.br/podcast/podcast-canaltech/ct-news-20092019-redmi-8a-xiaomi-lanca-smartphone-bateria-poderosa-3073/
-        urls['categs'] = list(map(lambda x: x.split("/")[3], urls.url))
-        urls = urls[(urls.categs != 'video') & (urls.categs != 'podcast')]
-        return map(lambda x: scrapy.Request(url=x, callback=self.parse), urls.url.values)
+
+        mongo_provider = MongoConnector(None,None)
+        return [scrapy.Request(url=x['url'], callback=self.parse) for x in mongo_provider.get_collection(self.name+'-links').find({})]
 
     def parse(self, response):
         # Definindo o nome da pasta
@@ -112,9 +116,10 @@ class OlharDigitalScrapper(scrapy.Spider):
                         'writtennews':writtentext, 
                         'autor' :autor, 
                         'tags':tags, 
-                        'hora da publicação':timepub, 
-                        'hora de acesso':acessedtime, 
-                        'url':response.url
+                        'horapublicado':timepub, 
+                        'horaconsulta':acessedtime, 
+                        'url':response.url,
+                        'website': 'CanalTech'
                         }
         #yield or give the scraped info to scrapy
         yield scraped_info
