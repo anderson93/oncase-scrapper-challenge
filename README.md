@@ -4,11 +4,11 @@ Projeto para cumprimento de tarefa desafio definida pelo processo de seleção d
 <!-- ÍNDICE -->
 ## Índice
 
-* [ASObre o Projeto](#sobre-o-projeto)
+* [Sobre o Projeto](#sobre-o-projeto)
   * [Feito com](#feito-com)
-* [Início](#inicio)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+* [Início](#início)
+  * [Prerequisitos](#prerequisitos)
+  * [Instalação](#instalação)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -42,14 +42,17 @@ Para que possamos dar início à aquisição dos dados, será necessário o cump
 
 ### Prerequisitos
 
-Primeiramente teremos de configurar o MongoDB para que possamos usa-lo
-* MongoDb - Linux
+Primeiramente teremos de configurar o MongoDB para que possamos usa-lo.
+
+#### MongoDb - Linux
+
 - [RedHat](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 - [Ubuntu](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 - [Debian](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/)
 - [SUSE](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-suse/)
 - [Amazon Linux](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-amazon/)
-* MongoDb - MacOS
+
+#### MongoDb - MacOS
 ```sh
 brew tap mongodb/brew
 brew install mongodb-community@4.2
@@ -57,7 +60,7 @@ brew services start mongodb-community@4.2
 ```
 - Para mais informações sobre como [instalar o MongoDB no MacOS.](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
-### Installation
+### Instalação
  
 1. Clone o repositório
 ```sh
