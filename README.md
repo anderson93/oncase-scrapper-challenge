@@ -1,21 +1,27 @@
-# oncase-scrapper-challenge
-Projeto para cumprimento de tarefa desafio definida pelo processo de seleção da empresa Oncase Intelligence Consulting33
-
+# Oncase Scrapper Challenge
 <!-- ÍNDICE -->
 ## Índice
 
 * [Sobre o Projeto](#sobre-o-projeto)
-  * [Feito com](#feito-com)
+    * [Feito com](#feito-com)
 * [Início](#início)
-  * [Prerequisitos](#prerequisitos)
-    * [MongoDb - Linux](#mongodb---linux)
-  * [Instalação](#instalação)
+    * [Prerequisitos](#prerequisitos)
+        * [MongoDb - Linux](#mongodb---linux)
+        * [MongoDb - MacOS](#mongodb---macos)
+    * [Instalação](#instalação)
 * [Uso](#uso)
 * [Roadmap](#roadmap)
+* [Estratégia de deployment](#estratégia-de-deployment)
+* [Propostas de melhorias](#propostas-de-melhorias)
+* [Mapa dos arquivos](#mapa-dos-arquivos)
+* [Explicação dos Scrappers](#explicação-dos-scrappers)
+* [Pipeline](#pipeline)
+* [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
+    * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados`tech_news`)
 * [Contribuição](#contribuição)
 * [Licença](#licença)
 * [Contato](#contato)
-* [Reconhecimentos](#reconhecimento)
+* [Reconhecimentos](#reconhecimentos)
 
 
 
@@ -73,11 +79,7 @@ pip3 install -r requirements.txt
 <!-- EXEMPLOS DE USO -->
 ## Uso
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
+### TODO
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -86,6 +88,27 @@ Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-chall
 
 ### TODO: arquivo do log do projeto: ideias, decisões e reflexões ao longo do projeto.
 
+<!-- DEPLOYMENT -->
+## Estratégia de deployment
+### TODO
+<!-- ENHANCEMENTS -->
+## Propostas de melhorias
+### TODO
+<!-- CODEMAP -->
+## Mapa dos arquivos
+### TODO
+<!-- SCRAPPERSEXPLANATIONS -->
+## Explicação dos Scrappers
+### TODO
+<!-- WORFLOW -->
+## Pipeline
+### TODO
+<!-- DATABASES -->
+## Bases de dados no MongoDB
+### TODO
+<!-- COLLECTIONS -->
+## Coleções na base de dados `tech_news`
+### TODO
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
 
@@ -99,8 +122,6 @@ Contribuições é o que faz a comunidade open source forte e um maravilhoso amb
 6. ???
 7. Profit!
 
-
-
 <!-- LICENÇA -->
 ## Licença
 
@@ -109,7 +130,7 @@ Distribuída sob a licença MIT. Veja `LICENSE` para mais informações.
 <!-- CONTATO -->
 ## Contato
 
-Anderson Henrique de Oliveira Conceição - [email](mailto:anderson93@gmail.com)
+[Anderson Henrique de Oliveira Conceição](https://www.linkedin.com/in/anderson-hoc/) - [email](mailto:anderson93@gmail.com)
 
 Project Link: [https://github.com/anderson93/oncase-scrapper-challenge](https://github.com/anderson93/oncase-scrapper-challenge)
 
