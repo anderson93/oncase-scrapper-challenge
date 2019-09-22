@@ -4,6 +4,7 @@ import datetime
 from bs4 import BeautifulSoup                                                                                                                 
 import scrapy
 
+# As informações de tempo estão em português, então converto-as para o horário padrão
 def timeparser(time_to_be_parsed):
     FULL_MONTHS = {' de janeiro de ': '/01/', ' de fevereiro de ': '/02/', 
                     u' de março de ': '/03/', ' de abril de ': '/04/',
@@ -16,8 +17,30 @@ def timeparser(time_to_be_parsed):
         time_to_be_parsed = time_to_be_parsed.replace(word, initial)
     return datetime.datetime.strptime(time_to_be_parsed, "%d/%m/%Y %Hh%M")
 
+def autorparse(autor, response):
+    # Algumas paginas possuem a formatação diferente, sendo então necessária essa mudança
+    if autor is not None:
+       pass
+    else:
+        try:
+            autor = response.css('div.col-xs.by-time').xpath('.//span/text()').get().split('\n')[1] 
+        except AttributeError:
+            autor = response.css('div.col-xs.by-time').xpath('.//span/text()').get()
+        assert autor is not None
+    # Algumas vezes aconeceu de aparecer essa string inicial
+    if 'Por' in autor:
+        autor = autor.replace('Por ','')
+    else:
+        pass
+    # Deixando mais uniforme
+    if autor[-1] == ' ':
+        autor = autor[:-1]
+    else:
+        pass
+    return autor
+
 class OlharDigitalScrapper(scrapy.Spider):
-    name = "canaltech-links"
+    name = "canaltech"
 
     allowed_domains = ['canaltech.com.br']
     def start_requests(self):
@@ -25,8 +48,16 @@ class OlharDigitalScrapper(scrapy.Spider):
         # Apesar de ser facil capturar as notícias através do site RSS do portal,
         # perderiamos a possibilidade de pegar também informações como as tags relacionadas a notícia,
         # portanto para esse site continuarei pegando o site normal ao invés de ir pelo 
-        # caminho mais prático que seria o RSS
-        return map(lambda x: scrapy.Request(url=x, callback=self.parse), pd.read_csv('canaltech-links.csv')['url'].values)
+        # caminho mais prático que seria o RSS        
+        urls = pd.read_csv('canaltech-links.csv')
+        # A cada página esse elemento se repete, retiro para evitar conflitos na função parse
+        urls = urls[urls.values != 'https://canaltech.com.br/ultimas/']
+        # Removendo artigos de video, pois além da formatação ser diferente, proveem uma 
+        # leve explicação somente do video exemplo: https://canaltech.com.br/video/hands-on/apple-iphone-11-unboxinghands-on-11959/
+        # - assim como podcast: https://canaltech.com.br/podcast/podcast-canaltech/ct-news-20092019-redmi-8a-xiaomi-lanca-smartphone-bateria-poderosa-3073/
+        urls['categs'] = list(map(lambda x: x.split("/")[3], urls.url))
+        urls = urls[(urls.categs != 'video') & (urls.categs != 'podcast')]
+        return map(lambda x: scrapy.Request(url=x, callback=self.parse), urls.url.values)
 
     def parse(self, response):
         # Definindo o nome da pasta
@@ -50,25 +81,21 @@ class OlharDigitalScrapper(scrapy.Spider):
 
         # Limpeza das tags da notícia
         # Why do it the hard way? -> https://stackoverflow.com/a/34532382
-        paragraphs = [BeautifulSoup(text).get_text() for text in response.css('div.p402_premium').xpath('.//p').getall()]
+        paragraphs = [BeautifulSoup(text, features="lxml").get_text() for text in response.css('div.p402_premium').xpath('.//p').getall()]
         # Tornando todos os paragrafos em um único elemento, isso se faz necessário por causa da formatação HTML
         # da página, que é quebrada no meio por links de artigos relacionados
         writtentext = ' '.join(paragraphs)
         title = response.css('section').xpath('.//h1/text()').get()
         tags = file[3]
-        autor = response.css('div.col-xs.by-time').xpath('.//span/a/text()').get()
-
-        if 'editado' in autor:
-            editor = autor.split('por')[1][1:]
-            autor = autor.split(',')[0]
-            assert editor is not None
-        else:
-            editor = None
-            assert editor is None
-
-
-        time_to_parse = response.css('div.col-xs.by-time').xpath('.//span/text()').getall()[1]
-        timepub = timeparser(time_to_parse)
+        # Limpeza do texto do autor
+        autor = autorparse(response.css('div.col-xs.by-time').xpath('.//span/a/text()').get(), response)
+        # Algumas notícias são post de propagandas pagas, por isso não tem a data de publicação
+        try:
+            timepub = timeparser(response.css('div.col-xs.by-time').xpath('.//span/text()').getall()[1])
+            assert timepub is not None
+        except IndexError:
+            timepub = None
+            assert timepub is None
 
         acessedtime = datetime.datetime.now()
 
@@ -77,7 +104,6 @@ class OlharDigitalScrapper(scrapy.Spider):
         assert writtentext is not None
         assert autor is not None
         assert tags is not None
-        assert timepub is not None
         assert acessedtime is not None
         assert response.url is not None
 
@@ -85,7 +111,6 @@ class OlharDigitalScrapper(scrapy.Spider):
                         'title': title, 
                         'writtennews':writtentext, 
                         'autor' :autor, 
-                        'editor':editor, 
                         'tags':tags, 
                         'hora da publicação':timepub, 
                         'hora de acesso':acessedtime, 
