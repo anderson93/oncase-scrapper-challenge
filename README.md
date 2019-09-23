@@ -109,9 +109,6 @@ Como a aplicação possui um drop de itens duplicados na base, é possível exec
 
 A escolha do framework Scrapy foi também dada graças a estrutura de pipeline do mesmo, pois assim ele consegue devolver os dados scrapeados para vários backends diferentes, assim o projeto tanto pode ser iniciado em um MongoDB (como nesta versão), como também além do MongoDB ele pode exportar os dados para outras [fontes externas, como o sistema de arquivos local ou FTP, S3](https://docs.scrapy.org/en/latest/topics/feed-exports.html) e além desses, é possível também fazer a exportação através do Python, o que abre um leque de possibilidades.
 
-<!-- ENHANCEMENTS -->
-## Propostas de melhorias
-#### TODO
 <!-- CODEMAP -->
 ## Mapa dos arquivos
 ```sh
@@ -143,7 +140,7 @@ A escolha do framework Scrapy foi também dada graças a estrutura de pipeline d
 ## Bases de dados no MongoDB
 Como saída será criada o banco de dados ``tech_news`` no MongoDB.
 <!-- COLLECTIONS -->
-#### Coleções na base de dados `tech_news`
+### Coleções na base de dados `tech_news`
 Dentro do banco de dados, haverão coleções, que serão criadas:
 * ``gizmodo-links`` -> Detém os links de notícias do site GizModo.
 * ``olhardigital-links`` -> Detém os links de notícias do site OlharDigital.
