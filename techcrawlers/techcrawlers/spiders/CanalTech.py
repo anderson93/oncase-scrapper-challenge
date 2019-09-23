@@ -39,7 +39,7 @@ def autorparse(autor, response):
         pass
     return autor
 
-class OlharDigitalScrapper(scrapy.Spider):
+class CanalTechScrapper(scrapy.Spider):
     name = "canaltech"
 
     allowed_domains = ['canaltech.com.br']

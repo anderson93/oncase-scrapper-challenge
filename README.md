@@ -17,7 +17,7 @@
 * [Explicação dos Scrappers](#explicação-dos-scrappers)
 * [Pipeline](#pipeline)
 * [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
-    * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados`tech_news`)
+    * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados-tech_news)
 * [Contribuição](#contribuição)
 * [Licença](#licença)
 * [Contato](#contato)
@@ -107,7 +107,7 @@ Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-chall
 ## Bases de dados no MongoDB
 #### TODO
 <!-- COLLECTIONS -->
-## Coleções na base de dados `tech_news`
+### Coleções na base de dados `tech_news`
 #### TODO
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
