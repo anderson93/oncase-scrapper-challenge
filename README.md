@@ -12,7 +12,6 @@
 * [Uso](#uso)
 * [Roadmap](#roadmap)
 * [Estratégia de deployment](#estratégia-de-deployment)
-* [Propostas de melhorias](#propostas-de-melhorias)
 * [Mapa dos arquivos](#mapa-dos-arquivos)
 * [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
     * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados-tech_news)
@@ -142,10 +141,10 @@ Como saída será criada o banco de dados ``tech_news`` no MongoDB.
 <!-- COLLECTIONS -->
 ### Coleções na base de dados `tech_news`
 Dentro do banco de dados, haverão coleções, que serão criadas:
-* ``gizmodo-links`` -> Detém os links de notícias do site GizModo.
+* ``gizmodo-links``      -> Detém os links de notícias do site GizModo.
 * ``olhardigital-links`` -> Detém os links de notícias do site OlharDigital.
-* ``canaltech-links`` -> Detém os links de notícias do site CanalTech.
-* ``news_data`` -> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
+* ``canaltech-links``    -> Detém os links de notícias do site CanalTech.
+* ``news_data``          -> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
 
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
