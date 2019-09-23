@@ -14,7 +14,6 @@
 * [Estratégia de deployment](#estratégia-de-deployment)
 * [Propostas de melhorias](#propostas-de-melhorias)
 * [Mapa dos arquivos](#mapa-dos-arquivos)
-* [Pipeline](#pipeline)
 * [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
     * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados-tech_news)
 * [Contribuição](#contribuição)
@@ -94,19 +93,19 @@ Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-chall
 
 Algumas estratégias podem ser tomadas para o deployment dessa aplicação em produção, mas que dependem de algumas características do projeto. 
 
-##### Spiders
+#### Spiders
 
-Cada spider é uma classe definida pelo Scrapy que permite que seja definido as ações a serem tomadas quando se realiza o request no site, sejam ações de scrapping ou de crawling. Em um ambiente de produção, é possível construir mais spiders para diferentes sites e a abordagm do problea continuará a mesma.
+Cada spider é uma classe definida pelo Scrapy que permite que seja definido as ações a serem tomadas quando se realiza o request no site, sejam ações de scrapping ou de crawling. Em um ambiente de produção, é possível construir mais spiders para diferentes sites e a abordagem do problema continuará a mesma.
 
-##### Request limits
+#### Request limits
 
 O scrapy possue uma gama de configurações que nos permitem realizar enriquecimento de base de forma mais contínua e progressiva. Alguns problemas que podem existir seriam limites de requests, bloqueio de IP, bloqueio por falta de header http, entre outros. Algumas das configurações são: delay do request, delay aleatório do request, inclusão de header do navegador, uso de cookies, etc. Isso é importante no ambiente de produção, pois torna a aplicação mais resiliente.
 
-##### Escalabilidade
+#### Escalabilidade
 
 Como a aplicação possui um drop de itens duplicados na base, é possível executar a aplicação em diferentes máquinas que compartilhem do mesmo backend, assim em projetos maiores podemos nos utilizar de diversas máquinas e portanto diversos IPs diferentes (evitando bloqueios de IP), mas o enriquecimento da base ocorrerá sem duplicados.
 
-##### Backend
+#### Backend
 
 A escolha do framework Scrapy foi também dada graças a estrutura de pipeline do mesmo, pois assim ele consegue devolver os dados scrapeados para vários backends diferentes, assim o projeto tanto pode ser iniciado em um MongoDB (como nesta versão), como também além do MongoDB ele pode exportar os dados para outras [fontes externas, como o sistema de arquivos local ou FTP, S3](https://docs.scrapy.org/en/latest/topics/feed-exports.html) e além desses, é possível também fazer a exportação através do Python, o que abre um leque de possibilidades.
 
@@ -115,33 +114,31 @@ A escolha do framework Scrapy foi também dada graças a estrutura de pipeline d
 #### TODO
 <!-- CODEMAP -->
 ## Mapa dos arquivos
+```sh
 .
 ├── LICENSE
 ├── README.md
-├── <drop_tech_db class="py"></drop_tech_db>
-├── requirements.txt
-├── start.sh
+├── drop_tech_db.py  -> Script em python para droppar a base em caso de cold start
+├── requirements.txt -> Dependências necessárias do python
+├── start.sh         -> Script para uso do programa
 └── techcrawlers
-    ├── scrapy.cfg
+    ├── scrapy.cfg   -> Arquivo de configuração do Scrapy
     └── techcrawlers
         ├── __init__.py
-        ├── items.py
-        ├── middlewares.py
-        ├── mongo_connector.py
-        ├── pipelines.py
-        ├── settings.py
+        ├── items.py            -> Configurações da estrutura da saída dos arquivos
+        ├── middlewares.py      -> Definições dos modelos dos requests
+        ├── mongo_connector.py  -> Arquivo auxiliar para conexão com o MongoDB
+        ├── pipelines.py        -> Configuração dos backends
+        ├── settings.py         -> Configurações de variáveis do Scrapy
         └── spiders
-            ├── CanalTech.py
-            ├── CanalTechLinks.py
-            ├── GizModo.py
-            ├── GizModoLinks.py
-            ├── OlharDigital.py
-            ├── OlharDigitalLinks.py
+            ├── CanalTech.py          -> Spider para captura de notícias
+            ├── CanalTechLinks.py     -> Spider para captura dos links das notícias
+            ├── GizModo.py            -> Spider para captura de notícias
+            ├── GizModoLinks.py       -> Spider para captura dos links das notícias
+            ├── OlharDigital.py       -> Spider para captura de notícias
+            ├── OlharDigitalLinks.py  -> Spider para captura dos links das notícias
             └── __init__.py
-
-<!-- WORFLOW -->
-## Pipeline
-#### TODO
+```
 <!-- DATABASES -->
 ## Bases de dados no MongoDB
 Como saída será criada o banco de dados ``tech_news`` no MongoDB.
