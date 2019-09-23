@@ -1,0 +1,7 @@
+bs4==0.0.1
+jupyter-client==5.2.4
+jupyter-console==6.0.0
+jupyter-core==4.4.0
+numpy==1.16.3
+pymongo==3.9.0
+Scrapy==1.7.3
