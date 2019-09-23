@@ -14,7 +14,6 @@
 * [Estratégia de deployment](#estratégia-de-deployment)
 * [Propostas de melhorias](#propostas-de-melhorias)
 * [Mapa dos arquivos](#mapa-dos-arquivos)
-* [Explicação dos Scrappers](#explicação-dos-scrappers)
 * [Pipeline](#pipeline)
 * [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
     * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados-tech_news)
@@ -78,8 +77,10 @@ pip3 install -r requirements.txt
 
 <!-- EXEMPLOS DE USO -->
 ## Uso
-
-### TODO
+- Após as instalações dos pré-requisitos das seções anteriores, para executar a aplicação basta:
+```sh
+./start.sh
+```
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -90,25 +91,68 @@ Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-chall
 
 <!-- DEPLOYMENT -->
 ## Estratégia de deployment
-#### TODO
+
+Algumas estratégias podem ser tomadas para o deployment dessa aplicação em produção, mas que dependem de algumas características do projeto. 
+
+##### Spiders
+
+Cada spider é uma classe definida pelo Scrapy que permite que seja definido as ações a serem tomadas quando se realiza o request no site, sejam ações de scrapping ou de crawling. Em um ambiente de produção, é possível construir mais spiders para diferentes sites e a abordagm do problea continuará a mesma.
+
+##### Request limits
+
+O scrapy possue uma gama de configurações que nos permitem realizar enriquecimento de base de forma mais contínua e progressiva. Alguns problemas que podem existir seriam limites de requests, bloqueio de IP, bloqueio por falta de header http, entre outros. Algumas das configurações são: delay do request, delay aleatório do request, inclusão de header do navegador, uso de cookies, etc. Isso é importante no ambiente de produção, pois torna a aplicação mais resiliente.
+
+##### Escalabilidade
+
+Como a aplicação possui um drop de itens duplicados na base, é possível executar a aplicação em diferentes máquinas que compartilhem do mesmo backend, assim em projetos maiores podemos nos utilizar de diversas máquinas e portanto diversos IPs diferentes (evitando bloqueios de IP), mas o enriquecimento da base ocorrerá sem duplicados.
+
+##### Backend
+
+A escolha do framework Scrapy foi também dada graças a estrutura de pipeline do mesmo, pois assim ele consegue devolver os dados scrapeados para vários backends diferentes, assim o projeto tanto pode ser iniciado em um MongoDB (como nesta versão), como também além do MongoDB ele pode exportar os dados para outras [fontes externas, como o sistema de arquivos local ou FTP, S3](https://docs.scrapy.org/en/latest/topics/feed-exports.html) e além desses, é possível também fazer a exportação através do Python, o que abre um leque de possibilidades.
+
 <!-- ENHANCEMENTS -->
 ## Propostas de melhorias
 #### TODO
 <!-- CODEMAP -->
 ## Mapa dos arquivos
-#### TODO
-<!-- SCRAPPERSEXPLANATIONS -->
-## Explicação dos Scrappers
-#### TODO
+.
+├── LICENSE
+├── README.md
+├── <drop_tech_db class="py"></drop_tech_db>
+├── requirements.txt
+├── start.sh
+└── techcrawlers
+    ├── scrapy.cfg
+    └── techcrawlers
+        ├── __init__.py
+        ├── items.py
+        ├── middlewares.py
+        ├── mongo_connector.py
+        ├── pipelines.py
+        ├── settings.py
+        └── spiders
+            ├── CanalTech.py
+            ├── CanalTechLinks.py
+            ├── GizModo.py
+            ├── GizModoLinks.py
+            ├── OlharDigital.py
+            ├── OlharDigitalLinks.py
+            └── __init__.py
+
 <!-- WORFLOW -->
 ## Pipeline
 #### TODO
 <!-- DATABASES -->
 ## Bases de dados no MongoDB
-#### TODO
+Como saída será criada o banco de dados ``tech_news`` no MongoDB.
 <!-- COLLECTIONS -->
-### Coleções na base de dados `tech_news`
-#### TODO
+#### Coleções na base de dados `tech_news`
+Dentro do banco de dados, haverão coleções, que serão criadas:
+* ``gizmodo-links`` -> Detém os links de notícias do site GizModo.
+* ``olhardigital-links`` -> Detém os links de notícias do site OlharDigital.
+* ``canaltech-links`` -> Detém os links de notícias do site CanalTech.
+* ``news_data`` -> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
+
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
 
