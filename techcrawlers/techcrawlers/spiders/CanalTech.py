@@ -118,6 +118,7 @@ class CanalTechScrapper(scrapy.Spider):
                         'horapublicado':timepub, 
                         'horaconsulta':acessedtime, 
                         'url':response.url,
+                        'paragraphsnumber':len(paragraphs),
                         'website': 'CanalTech'
                         }
         #yield or give the scraped info to scrapy

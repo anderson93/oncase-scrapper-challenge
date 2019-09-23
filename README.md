@@ -175,7 +175,7 @@ Link do projeto: [https://github.com/anderson93/oncase-scrapper-challenge](https
 <!-- RECONHECIMENTOS -->
 ## Reconhecimentos
 
-* Obrigado a Oncase por me fornecer essa oportunidade de demonstrar o um pouco do meu conhecimento através deste desafio.
+* Obrigado a Oncase por me fornecer essa oportunidade de demonstrar um pouco do meu conhecimento através deste desafio.
 * Agradeço também a comunidade Open-Source sem a qual jamais estaríamos desenvolvendo tecnologia e soluções a nivel industrial tão facilmente.
 
 

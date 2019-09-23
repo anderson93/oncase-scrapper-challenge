@@ -16,3 +16,4 @@ class TechcrawlersItem(scrapy.Item):
     hora = scrapy.Field()
     url = scrapy.Field()
     website = scrapy.Field()
+    paragraphsnumber = scrapy.Field()
