@@ -76,8 +76,44 @@ pip3 install -r requirements.txt
 <!-- EXEMPLOS DE USO -->
 ## Uso
 - Após as instalações dos pré-requisitos das seções anteriores, para executar a aplicação basta:
+
 ```sh
 ./start.sh
+```
+
+- Iniciar-se-á a aplicação e deve-se informar, caso desejar iniciar com cold start, que significa limpando previamente a DB chamada `tech_news` do servidor MongoDB, caso já exista.
+
+```sh
+######################################################################
+######################################################################
+                      Scrapper Oncase Challenge
+######################################################################
+######################################################################
+
+O objetivo deste projeto é a execução processo de web crawling 
+paraestruturar dados de portais concorrentes de notícias, agregar 
+métricas sobre essesdados e disponibilizar informações.
+
+Iremos agora iniciar os processos, portanto é então necessário
+saber algumas informações.
+
+Deseja um começo cold start (realizarei um drop caso já exista a base tech_news)?
+Y ou n:
+```
+
+- É então perguntado quantas páginas de cada portal serão crawladas para se obter os links, para que então posteriormente sejam scrappeadas.
+```sh
+Quantas páginas das notícias do portal OlharDigital você deseja: [número de páginas]
+E agora do CanalTech: [número de páginas]
+E para finalizar, GizModo: [número de páginas]
+```
+- Quando a aplicação finalizar, aparecerá a mensagem abaixo e todos os dados estarão no MongoDB.
+```sh
+######################################################################
+######################################################################
+                               JOB DONE!
+######################################################################
+######################################################################
 ```
 
 <!-- ROADMAP -->
@@ -107,6 +143,17 @@ Como a aplicação possui um drop de itens duplicados na base, é possível exec
 #### Backend
 
 A escolha do framework Scrapy foi também dada graças a estrutura de pipeline do mesmo, pois assim ele consegue devolver os dados scrapeados para vários backends diferentes, assim o projeto tanto pode ser iniciado em um MongoDB (como nesta versão), como também além do MongoDB ele pode exportar os dados para outras [fontes externas, como o sistema de arquivos local ou FTP, S3](https://docs.scrapy.org/en/latest/topics/feed-exports.html) e além desses, é possível também fazer a exportação através do Python, o que abre um leque de possibilidades.
+
+#### Monitoramento
+
+Através do próprio scrapy, também é possível algumas estratégias de monitoramento das tarefas das Spiders, como por exemplo mensagem de status via e-mail, bot do telegram ou notificação via slack. As notificações podem ser a partir de qualquer natureza, como: motor iniciado, motor parado, itens scrappeados, itens droppados, erros dos itens, spider aberta, spider fechada, spider ociosa, erro de spider, requests agendados, requests droppado, requests recebido, requests baixado; dentre outros.
+
+#### Juntando tudo, o que é possível ser feito para dar um deployment perfeito?
+
+Existem duas bibliotecas que foram criadas com o objetivo de tornar o deployment das Spiders mais fácil. A primeira delas se chama [Scrapyd](https://scrapyd.readthedocs.io/en/stable/overview.html). Essa biblioteca, funciona todos os requests de processos do scrapy, assim os administrando e os alocando em múltiplos processos em paralelo. 
+Além disso, ele fornece uma interface de comunicação e agendamento de Spiders, que na metáfora da biblioteca se chamam eggs (filhote de aranha, lol), que podem ser uppados através da porta da biblioteca e serão chocados (lançados) no momento agendado. Essas implementações disponíveis através do Scrapyd, permite que as Spiders sejam controladas remotamente e portanto serem implantadas em clusters, o que abre espaço para a segunda biblioteca chamada ScrapydWeb.
+
+A [ScrapydWeb](https://github.com/my8100/scrapydweb), é uma aplicação web que permite monitoramento, visualização e análise de logs. Através dessa biblioteca, é possível controlar as spiders ativas, agendar através de uma interface web entre algumas outras funções já descritas aqui, mas agora com uma UI amigável e assim possível a configuração, deployment, agendamento, execução de comandos em multinodes e tudo através da interface web. É possível também, conectar a outros clusters através do ponto de comunicação gerado pelo Scrapyd, e assim controla-los e monitora-los remotamente, todas as informações agregadas em apenas uma página web. 
 
 <!-- CODEMAP -->
 ## Mapa dos arquivos
@@ -141,10 +188,10 @@ Como saída será criada o banco de dados ``tech_news`` no MongoDB.
 <!-- COLLECTIONS -->
 ### Coleções na base de dados `tech_news`
 Dentro do banco de dados, haverão coleções, que serão criadas:
-* ``gizmodo-links``      -> Detém os links de notícias do site GizModo.
-* ``olhardigital-links`` -> Detém os links de notícias do site OlharDigital.
-* ``canaltech-links``    -> Detém os links de notícias do site CanalTech.
-* ``news_data``          -> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
+* ``gizmodo-links``-------> Detém os links de notícias do site GizModo.
+* ``olhardigital-links``--> Detém os links de notícias do site OlharDigital.
+* ``canaltech-links``-----> Detém os links de notícias do site CanalTech.
+* ``news_data``-----------> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
 
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
