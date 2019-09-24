@@ -155,6 +155,8 @@ Além disso, ele fornece uma interface de comunicação e agendamento de Spiders
 
 A [ScrapydWeb](https://github.com/my8100/scrapydweb), é uma aplicação web que permite monitoramento, visualização e análise de logs. Através dessa biblioteca, é possível controlar as spiders ativas, agendar através de uma interface web entre algumas outras funções já descritas aqui, mas agora com uma UI amigável e assim possível a configuração, deployment, agendamento, execução de comandos em multinodes e tudo através da interface web. É possível também, conectar a outros clusters através do ponto de comunicação gerado pelo Scrapyd, e assim controla-los e monitora-los remotamente, todas as informações agregadas em apenas uma página web. 
 
+![servers](https://raw.githubusercontent.com/my8100/scrapydweb/master/screenshots/servers.png)
+
 <!-- CODEMAP -->
 ## Mapa dos arquivos
 ```sh
