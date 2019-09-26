@@ -28,7 +28,7 @@ read coldstart
 if [ $coldstart == 'Y' ]
 then
     (python3 drop_tech_db.py)
-    (rm techcrawlers/logs/*)
+    (rm -rf /techcrawlers/logs)
 fi
 # Adquirindo as informações do usuário
 echo -n 'Quantas páginas das notícias do portal OlharDigital você deseja: '
@@ -39,6 +39,8 @@ read limit_pages_canaltech
 
 echo -n 'E para finalizar, GizModo: '
 read limit_pages_gizmodo
+
+mkdir ./techcrawlers/logs
 
 # Criando as bases de links
 (cd ./techcrawlers && scrapy crawl olhardigital-links -a limit_pages=$limit_pages_olhardigital --logfile ./logs/olhardigital-links.log)
