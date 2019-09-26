@@ -7,13 +7,13 @@ class OlharDigitalLinksScrapper(scrapy.Spider):
 
     collection_name = "olhardigital-links"
     # Pegando os links para serem scrappeados
-    def __init__(self,limit_pages, *args, **kwargs):
+    def __init__(self,limit_pages=None, *args, **kwargs):
         super(OlharDigitalLinksScrapper, self).__init__(*args, **kwargs)
         if limit_pages is not None:
             self.limit_pages = int(limit_pages)
         else:
             self.limit_pages = 5
-   
+
     def start_requests(self):
         urls = [f'https://olhardigital.com.br/noticias/{page}' for page in range(1, self.limit_pages)]
         for url in urls:

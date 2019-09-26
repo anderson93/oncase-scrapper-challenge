@@ -89,7 +89,7 @@ class CanalTechScrapper(scrapy.Spider):
         # da página, que é quebrada no meio por links de artigos relacionados
         writtentext = ' '.join(paragraphs)
         title = response.css('section').xpath('.//h1/text()').get()
-        tags = file[3]
+        tags = file[3].lower()
         # Limpeza do texto do autor
         autor = autorparse(response.css('div.col-xs.by-time').xpath('.//span/a/text()').get(), response)
         # Algumas notícias são post de propagandas pagas, por isso não tem a data de publicação

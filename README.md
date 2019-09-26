@@ -97,7 +97,8 @@ métricas sobre essesdados e disponibilizar informações.
 Iremos agora iniciar os processos, portanto é então necessário
 saber algumas informações.
 
-Deseja um começo cold start (realizarei um drop caso já exista a base tech_news)?
+Deseja um começo cold start (realizarei um drop caso já exista a base 
+tech_news e eliminarei também os logs da pasta)?
 Y ou n:
 ```
 
@@ -109,6 +110,12 @@ E para finalizar, GizModo: [número de páginas]
 ```
 - Quando a aplicação finalizar, aparecerá a mensagem abaixo e todos os dados estarão no MongoDB.
 ```sh
+Links do OlharDigital capturados! 1/3
+Links do CanalTech capturados! 2/3
+Links do GizModo capturados! 3/3
+Páginas do OlharDigital capturadas! 1/3
+Páginas do CanalTech capturadas! 2/3
+Páginas do GizModo capturadas! 3/3
 ######################################################################
 ######################################################################
                                JOB DONE!
@@ -167,6 +174,7 @@ A [ScrapydWeb](https://github.com/my8100/scrapydweb), é uma aplicação web que
 ├── requirements.txt -> Dependências necessárias do python
 ├── start.sh         -> Script para uso do programa
 └── techcrawlers
+    ├── logs         -> Pasta de saída dos logs
     ├── scrapy.cfg   -> Arquivo de configuração do Scrapy
     └── techcrawlers
         ├── __init__.py

@@ -46,7 +46,7 @@ class OlharDigitalScrapper(scrapy.Spider):
         # da página, que é quebrada no meio por links de artigos relacionados
         writtentext = ' '.join(paragraphs)
         title = response.css('div.mat-imagem').xpath(".//h1/text()").get()
-        tags = response.css('div.mat-tags').xpath(".//span/text()").getall() 
+        tags = list(set([x.lower() for x in response.css('div.mat-tags').xpath(".//span/text()").getall()]))
         autor, datepub, hourpub = response.css('div.mat-meta').xpath(".//span/text()").getall()
         if 'editado' in autor:
             editor = autor.split('por')[1][1:]

@@ -51,7 +51,7 @@ class GizModoScrapper(scrapy.Spider):
         # da página, que é quebrada no meio por links de artigos relacionados
         writtentext = ' '.join(paragraphs)
         title = response.css("header")[1].xpath(".//h1/text()").get() 
-        tags = response.css('div.postTags-list').xpath('.//a/text()').getall() 
+        tags = list(set([x.lower() for x in response.css('div.postTags-list').xpath('.//a/text()').getall()]))
         autor = response.css('div.postMeta--author-author.metaFont.fn').xpath('.//a/text()').get()   
         editor = None
         timepub = timeparser(response.css('div.metaFont.metaDate').xpath('.//abbr/text()').get().replace('@', ''))

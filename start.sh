@@ -20,13 +20,15 @@ métricas sobre essesdados e disponibilizar informações.\n\n'
 printf 'Iremos agora iniciar os processos, portanto é então necessário
 saber algumas informações.\n\n'
 
-echo -n 'Deseja um começo cold start (realizarei um drop caso já exista a base tech_news)?
+echo -n 'Deseja um começo cold start (realizarei um drop caso já exista a base 
+tech_news e eliminarei também os logs da pasta)?
 Y ou n: '
 read coldstart
 # Fazendo o drop na base, para que seja realizado o cold start
 if [ $coldstart == 'Y' ]
 then
     (python3 drop_tech_db.py)
+    (rm techcrawlers/logs/*)
 fi
 # Adquirindo as informações do usuário
 echo -n 'Quantas páginas das notícias do portal OlharDigital você deseja: '
@@ -39,14 +41,24 @@ echo -n 'E para finalizar, GizModo: '
 read limit_pages_gizmodo
 
 # Criando as bases de links
-(cd ./techcrawlers && scrapy crawl olhardigital-links -a limit_pages=$limit_pages_olhardigital)
-(cd ./techcrawlers && scrapy crawl canaltech-links -a limit_pages=$limit_pages_canaltech)
-(cd ./techcrawlers && scrapy crawl gizmodo-links -a limit_pages=$limit_pages_gizmodo)
+(cd ./techcrawlers && scrapy crawl olhardigital-links -a limit_pages=$limit_pages_olhardigital --logfile ./logs/olhardigital-links.log)
+printf 'Links do OlharDigital capturados! 1/3\n'
+
+(cd ./techcrawlers && scrapy crawl canaltech-links -a limit_pages=$limit_pages_canaltech --logfile ./logs/canaltech-links.log)
+printf 'Links do CanalTech capturados! 2/3\n'
+
+(cd ./techcrawlers && scrapy crawl gizmodo-links -a limit_pages=$limit_pages_gizmodo --logfile ./logs/gizmodo-links.log)
+printf 'Links do GizModo capturados! 3/3\n'
 
 # Scrappeando os dados
-(cd ./techcrawlers && scrapy crawl olhardigital)
-(cd ./techcrawlers && scrapy crawl canaltech)
-(cd ./techcrawlers && scrapy crawl gizmodo)
+(cd ./techcrawlers && scrapy crawl olhardigital --logfile ./logs/olhardigital-scrapper.log)
+printf 'Páginas do OlharDigital capturadas! 1/3\n'
+
+(cd ./techcrawlers && scrapy crawl canaltech --logfile ./logs/canaltech-scrapper.log)
+printf 'Páginas do CanalTech capturadas! 2/3\n'
+
+(cd ./techcrawlers && scrapy crawl gizmodo --logfile ./logs/gizmodo-scrapper.log)
+printf 'Páginas do GizModo capturadas! 3/3\n\n'
 
 printf '######################################################################\n'
 printf '######################################################################\n'
