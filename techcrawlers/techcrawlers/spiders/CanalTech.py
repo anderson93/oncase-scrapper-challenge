@@ -47,11 +47,6 @@ class CanalTechScrapper(scrapy.Spider):
     collection_name = "news_data"
     def start_requests(self):
         # Diretório de urls
-        # Apesar de ser facil capturar as notícias através do site RSS do portal,
-        # perderiamos a possibilidade de pegar também informações como as tags relacionadas a notícia,
-        # portanto para esse site continuarei pegando o site normal ao invés de ir pelo 
-        # caminho mais prático que seria o RSS        
-
         # A cada página esse elemento se repete, retiro para evitar conflitos na função parse
 
 
@@ -73,7 +68,7 @@ class CanalTechScrapper(scrapy.Spider):
         filename = file[aux]
         # Nome da pasta principal onde ficarão os arquivos
         main_dir = file[2]
-        #TODO: salvar em pasta personalizada do portal de noticias referente -> file[2]
+        
         if os.path.isdir(main_dir):         # Checa se o diretório existe
             pass
         else:

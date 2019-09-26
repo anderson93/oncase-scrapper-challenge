@@ -30,7 +30,7 @@ class OlharDigitalScrapper(scrapy.Spider):
         filename = file[aux]
         # Nome da pasta principal onde ficarão os arquivos
         main_dir = file[2]
-        #TODO: salvar em pasta personalizada do portal de noticias referente -> file[2]
+
         if os.path.isdir(main_dir):         # Checa se o diretório existe
             pass
         else:

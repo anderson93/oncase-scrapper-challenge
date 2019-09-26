@@ -15,6 +15,10 @@
 * [Mapa dos arquivos](#mapa-dos-arquivos)
 * [Bases de dados no MongoDB](#bases-de-dados-no-mongodb)
     * [Coleções na base de dados `tech_news`](#coleções-na-base-de-dados-tech_news)
+* [Análises](#analises)
+    * [Classificador de tags](#classificador-de-tags)
+    * [Análise de sentimento](#analise-de-sentimento)
+    * [Dados sobre engajamento](#dados-sobre-engajamento)
 * [Contribuição](#contribuição)
 * [Licença](#licença)
 * [Contato](#contato)
@@ -128,7 +132,7 @@ Páginas do GizModo capturadas! 3/3
 
 Veja a seção [open issues](https://github.com/anderson93/oncase-scrapper-challenge/issues) para uma lista de melhorias sugeridas e problemas/bugs conhecidos.
 
-#### TODO: arquivo do log do projeto: ideias, decisões e reflexões ao longo do projeto.
+Existe também o log de trabalho [disponível](https://github.com/anderson93/oncase-scrapper-challenge/blob/master/log-trabalho.md).
 
 <!-- DEPLOYMENT -->
 ## Estratégia de deployment
@@ -202,6 +206,20 @@ Dentro do banco de dados, haverão coleções, que serão criadas:
 * ``olhardigital-links``--> Detém os links de notícias do site OlharDigital.
 * ``canaltech-links``-----> Detém os links de notícias do site CanalTech.
 * ``news_data``-----------> Detém as notícias scrappeadas dos sites OlharDigital, CanalTech e GizModo.
+
+<!-- ANÁLISES -->
+## Análises
+
+#### Classificador de tags
+- Afim de complementar com mais informações, é possível treinar um classificador de notícias que sugira mais tags para um texto, assim é possível complementar mais informações das notícias ao longo dos sites.
+
+#### Análise de sentimento
+- Existem casos de uso da análise de sentimentos em notícias, para predição de [comportamentos de compras](https://www.sciencedirect.com/science/article/pii/S0970389619301569) em diversos [setores](https://towardsdatascience.com/https-towardsdatascience-com-algorithmic-trading-using-sentiment-analysis-on-news-articles-83db77966704), afim de melhorar a predição dos dados através de fontes externas.
+
+#### Dados sobre engajamento
+- Não foi possível adquirir informações sobre engajamento nas páginas, devido ao plugin do Facebook, então uma forma de encontrar dados sobre engajamento, seria pegar através do feed do twitter os links das notícias e atualiza-las no MongoDB utilizando a url (que presumidamente é única no site). O Scrapy tem ferramentas para capturar a url mesmo depois de redirecionamentos, como por exemplo o uso de encurtadores de links como tinyurl e etc.
+- Com esses dados também seria possível identificar os melhores horários para serem postados específicas notícias sobre dados assuntos, afim de que a eficiência no engajamento seja máxima dada a categoria do texto.
+
 
 <!-- CONTRIBUIÇÃO -->
 ## Contribuição
